@@ -3,6 +3,7 @@
   import { useNotification } from "~/store/notification";
 
   definePageMeta({ name: "books", layout: "main" });
+
   const config = useAppConfig();
   const search = ref("");
   const isSearchResult = ref(false);
@@ -108,6 +109,11 @@
           </div>
         </NuxtLink>
       </template>
+    </div>
+    <div class="text-center py-5">
+      <button class="action-btn-invert red-on-hover text-sm">
+        Delete All Books
+      </button>
     </div>
   </section>
   <div class="flex justify-center my-10" v-else>

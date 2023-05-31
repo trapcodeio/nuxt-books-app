@@ -17,6 +17,7 @@
     description: "",
     available: true,
   });
+
   const formErrors = ref<string[]>([]);
   const isBusy = ref(false);
 
@@ -45,11 +46,7 @@
   <section class="p-5">
     <h2 class="text-lg font-bold text-primary-900">Add Book</h2>
 
-    <div class="mt-5 text-red-600 text-sm" v-if="formErrors.length">
-      <ul>
-        <li v-for="error of formErrors" :key="error"><b>-</b> {{ error }}</li>
-      </ul>
-    </div>
+    <FormErrors :errors="formErrors" />
 
     <form class="form mt-5" @submit.prevent="addBook">
       <div>
