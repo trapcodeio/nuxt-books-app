@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-neutral-200;
+}
+
+.action-btn {
+  @apply bg-primary-900 hover:bg-primary-800;
+  @apply text-white text-sm px-5 py-2 rounded;
+}
+
+.action-btn-invert {
+  @apply bg-white border border-primary-900;
+  @apply text-primary-900 text-sm px-5 py-2 rounded;
+}
+
+.action-btn-invert.red-on-hover {
+  @apply hover:border-red-700 hover:bg-red-700 hover:text-white;
+}
+
+.action-btn-invert.blue-on-hover {
+  @apply hover:border-blue-700 hover:bg-blue-700 hover:text-white;
+}
+
+input[type="text"],
+textarea {
+  @apply outline-primary-500;
+}
+
+.form {
+  @apply flex flex-col space-y-3;
+}
+
+.form label {
+  @apply text-sm text-gray-600 font-semibold;
+}
+
+.form input[type="text"],
+.form textarea {
+  @apply w-full border border-gray-300 rounded px-3 py-2 text-sm text-gray-600;
+}
