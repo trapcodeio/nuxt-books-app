@@ -7,21 +7,21 @@ body {
 }
 
 .action-btn {
-  @apply bg-primary-900 hover:bg-primary-800;
+  @apply bg-primary-600 hover:bg-primary-700;
   @apply text-white text-sm px-5 py-2 rounded;
 }
 
 .action-btn-invert {
-  @apply bg-white border border-primary-900;
-  @apply text-primary-900 text-sm px-5 py-2 rounded;
+  @apply bg-white border border-primary-700;
+  @apply text-primary-700 text-sm px-5 py-2 rounded;
 }
 
 .action-btn-invert.red-on-hover {
   @apply hover:border-red-700 hover:bg-red-700 hover:text-white;
 }
 
-.action-btn-invert.blue-on-hover {
-  @apply hover:border-blue-700 hover:bg-blue-700 hover:text-white;
+.action-btn-invert.green-on-hover {
+  @apply hover:border-primary-600 hover:bg-primary-600 hover:text-white;
 }
 
 input[type="text"],

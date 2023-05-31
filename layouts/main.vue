@@ -1,8 +1,11 @@
 <script setup lang="ts">
+  import { useNotification } from "~/store/notification";
+
   const links = [
-    { name: "Books", route: { name: "index" } },
+    { name: "Books", route: { name: "books" }, related: ["book"] },
     { name: "Add Book", route: { name: "books.add" } },
   ];
+  const notification = useNotification();
 </script>
 <template>
   <div class="flex h-screen">
@@ -11,12 +14,25 @@
         <template v-for="link of links">
           <NuxtLink
             :to="link.route"
-            :class="{ active: $route.name === link.route.name }"
+            :class="{
+              active: $route.name === link.route.name || (link.related && link.related.includes($route.name as string)),
+            }"
             >{{ link.name }}</NuxtLink
           >
         </template>
       </div>
       <div>
+        <template v-if="notification.data">
+          <div class="notification" :class="{ [notification.data.type]: true }">
+            <span v-text="notification.data.message" />
+            <button
+              @click.prevent="() => notification.clear()"
+              class="px-2 hover:text-base"
+            >
+              X
+            </button>
+          </div>
+        </template>
         <slot />
       </div>
     </div>
@@ -42,5 +58,17 @@
   #header a.active,
   #header a:hover {
     @apply bg-primary-600 text-white;
+  }
+
+  .notification {
+    @apply flex justify-between space-x-3 items-center text-sm mb-3 px-2 py-2;
+  }
+
+  .notification.success {
+    @apply bg-green-300 text-green-900;
+  }
+
+  .notification.error {
+    @apply bg-red-300  text-red-900;
   }
 </style>
