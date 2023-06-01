@@ -10,30 +10,44 @@
 <template>
   <div class="flex h-screen">
     <div id="page-content">
-      <div id="header">
-        <template v-for="link of links">
-          <NuxtLink
-            :to="link.route"
-            :class="{
+      <div class="flex justify-center mb-5">
+        <img
+          src="/static/media/logo.dark.png"
+          alt="logo"
+          class="w-[150px] h-[50px]"
+        />
+      </div>
+      <div id="page-container">
+        <div id="header">
+          <template v-for="link of links">
+            <NuxtLink
+              :to="link.route"
+              :class="{
               active: $route.name === link.route.name || (link.related && link.related.includes($route.name as string)),
             }"
-            >{{ link.name }}</NuxtLink
-          >
-        </template>
-      </div>
-      <div>
-        <template v-if="notification.data">
-          <div class="notification" :class="{ [notification.data.type]: true }">
-            <span v-text="notification.data.message" />
-            <button
-              @click.prevent="() => notification.clear()"
-              class="px-2 hover:text-base"
+              >{{ link.name }}</NuxtLink
             >
-              X
-            </button>
-          </div>
-        </template>
-        <slot />
+          </template>
+        </div>
+        <div>
+          <template v-if="notification.data">
+            <div
+              class="notification"
+              :class="{ [notification.data.type]: true }"
+            >
+              <span v-text="notification.data.message" />
+              <button
+                @click.prevent="() => notification.clear()"
+                class="px-2 hover:text-base"
+              >
+                X
+              </button>
+            </div>
+          </template>
+          <section>
+            <slot />
+          </section>
+        </div>
       </div>
     </div>
   </div>
@@ -41,8 +55,11 @@
 
 <style scoped>
   #page-content {
-    @apply m-auto bg-white max-w-md w-full;
-    @apply rounded-lg shadow;
+    @apply m-auto  max-w-md w-full;
+  }
+
+  #page-container {
+    @apply bg-white rounded-lg shadow;
     @apply border border-neutral-300;
   }
 
