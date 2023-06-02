@@ -1,0 +1,17 @@
+version: "3"
+services:
+  app:
+    container_name: nuxt-books-app
+    build:
+      context: ./../
+      dockerfile: .docker/Dockerfile
+#     target: ${FRONTEND_BUILD_TARGET:-dev} # use "prod" for production
+      target: dev
+    environment:
+      NITRO_PORT: ${NITRO_PORT:-8080}
+      VITE_API_URL: ${BACKEND_URL:-http://localhost:9000}
+    volumes:
+      - ./../:/usr/src/app/
+      - /usr/src/app/node_modules
+    ports:
+      - "8080:8080"
