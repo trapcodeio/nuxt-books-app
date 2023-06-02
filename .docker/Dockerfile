@@ -42,8 +42,5 @@ ENV NITRO_PORT 8080
 
 EXPOSE $NITRO_PORT
 
-
-#ENTRYPOINT ["/usr/share/entrypoint.sh"]
-
 # Start Nginx
 CMD ["yarn", "run", "start"]

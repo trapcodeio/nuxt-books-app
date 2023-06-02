@@ -5,6 +5,7 @@
 node_modules/
 
 # .env.local
+.env
 .env.local
 
 # README files
