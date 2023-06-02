@@ -11,7 +11,9 @@
   const isBusy = ref(false);
   const showEditForm = ref(false);
 
-  const { data: book, pending } = await BookService.fetchBook(bookId);
+  const { data: book, pending, error } = await BookService.fetchBook(bookId);
+
+  notification.watchApiError(error);
 
   useHead({
     title: () => {

@@ -18,7 +18,10 @@
     data: books,
     pending: isBusy,
     refresh: fetchBooks,
+    error: fetchBooksError,
   } = await BookService.fetchBooks();
+
+  notification.watchApiError(fetchBooksError);
 
   // delete all books
   async function deleteAllBooks() {

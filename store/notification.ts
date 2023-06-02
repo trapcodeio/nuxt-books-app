@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, Ref } from "vue";
 import { defineStore } from "pinia";
 
 type Notification = {
@@ -24,5 +24,23 @@ export const useNotification = defineStore("notification", () => {
     data.value = undefined;
   }
 
-  return { notify, clear, data };
+  // watch error messages and show them as notifications
+  function watchApiError(err: Ref<Error | null>) {
+    // Client-side only
+    if (!process.client) return;
+
+    watch(
+      err,
+      (error) => {
+        if (error) {
+          notify(error.message, "error");
+        } else {
+          clear();
+        }
+      },
+      { immediate: true }
+    );
+  }
+
+  return { notify, clear, data, watchApiError };
 });
