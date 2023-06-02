@@ -35,16 +35,13 @@ RUN yarn run build
 # prod stage
 FROM build AS prod
 
+ARG VITE_API_URL
+ENV VITE_API_URL $VITE_API_URL
 ENV NITRO_PORT 8080
 
 
-# Copy the built app to the Nginx HTML directory
-#COPY --from=build /usr/src/app/dist /usr/share/nginx/html
-#
-#COPY .docker/files/nginx.conf /etc/nginx/conf.d/default.conf
-#COPY .docker/files/entrypoint.sh /usr/share/entrypoint.sh
-
 EXPOSE $NITRO_PORT
+
 
 #ENTRYPOINT ["/usr/share/entrypoint.sh"]
 
