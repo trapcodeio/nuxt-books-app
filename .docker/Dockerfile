@@ -1,13 +1,18 @@
 # dev stage
 FROM node:18-alpine as dev
 
-ENV NODE_ENV development
-
+ARG NITRO_PORT
 ARG VITE_API_URL
-ENV VITE_API_URL $VITE_API_URL
-ENV NITRO_PORT 8080
 
-# setup workdir (next commands will run under this context, but also the running container will inherit this - if not overriden at runtime)
+ENV NODE_ENV=development
+ENV NITRO_PORT=$NITRO_PORT
+ENV VITE_API_URL=$VITE_API_URL
+
+# Echo environment variables for verification
+RUN echo "The NITRO_PORT is ${NITRO_PORT}"
+RUN echo "The VITE_API_URL is ${VITE_API_URL}"
+
+# setup workdir (next commands will run under this context, but also the running container will inherit this - if not overridden at runtime)
 WORKDIR /usr/src/app/
 
 # Needed for VS Code Remote Development
@@ -30,20 +35,27 @@ CMD ["yarn", "run", "dev"]
 # prod (and build) stages
 FROM dev AS build
 
+ARG NITRO_PORT
 ARG VITE_API_URL
-ENV VITE_API_URL $VITE_API_URL
+
+ENV NITRO_PORT=$NITRO_PORT
+ENV VITE_API_URL=$VITE_API_URL
+
+RUN echo "The VITE_API_URL is ${VITE_API_URL}"
 
 RUN yarn run build
 
 # prod stage
 FROM build AS prod
 
+ARG NITRO_PORT
 ARG VITE_API_URL
-ENV VITE_API_URL $VITE_API_URL
-ENV NITRO_PORT 8080
 
+ENV NITRO_PORT=$NITRO_PORT
+ENV VITE_API_URL=$VITE_API_URL
+
+RUN echo "The VITE_API_URL is ${VITE_API_URL}"
 
 EXPOSE $NITRO_PORT
 
-# Start Nginx
 CMD ["yarn", "run", "start"]

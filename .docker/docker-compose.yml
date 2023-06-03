@@ -5,12 +5,14 @@ services:
     build:
       context: ./../
       dockerfile: .docker/Dockerfile
-      target: dev # or prod for production
-    environment:
-      NITRO_PORT: ${NITRO_PORT:-8080}
-      VITE_API_URL: ${VITE_API_URL:-http://localhost:9000}
+      target: prod
+      args:
+        NITRO_PORT: ${NITRO_PORT:-8080}
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:9000}
     volumes:
-      - ./../:/usr/src/app/
-      - /usr/src/app/node_modules
+      - node_modules:/usr/src/app/node_modules
     ports:
       - "8080:8080"
+
+volumes:
+  node_modules:
