@@ -1,10 +1,6 @@
 import axios from "axios";
 
 const serverUrl = import.meta.env.VITE_API_URL as string | undefined;
-// if (!serverUrl) {
-//   throw new Error("Please define the VITE_API_URL environment variable.");
-// }
-
 const apiConfig = { baseURL: serverUrl };
 
 // Create axios instance
