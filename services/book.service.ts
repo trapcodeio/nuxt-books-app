@@ -21,16 +21,8 @@ export interface Book {
 export type BookForm = Pick<Book, "title" | "description" | "available">;
 
 class BookService {
-  static getAll() {
-    return $axios.get<Book[]>("/books");
-  }
-
   static fetchBooks() {
     return useFetch<Book[]>("/books", apiConfig);
-  }
-
-  static get(id: string) {
-    return $axios.get<Book>(`/books/${id}`);
   }
 
   static fetchBook(id: ComputedRef<string>) {
